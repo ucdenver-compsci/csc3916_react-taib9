@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { fetchMovie } from "../actions/movieActions";
 import {connect} from 'react-redux';
-import {Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import {Card, ListGroup, ListGroupItem, Form, Button } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs'
 import { Image } from 'react-bootstrap';
 
@@ -43,6 +43,23 @@ class MovieDetail extends Component {
                                 &nbsp;  <BsStarFill /> {review.rating}
                             </p>
                         )}
+
+                        <Form onSubmit={this.handleReviewSubmit}>
+                            <Form.Group controlId="username">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type="text" placeholder="Enter your username" required />
+                            </Form.Group>
+                            <Form.Group controlId="reviewText">
+                                <Form.Label>Review</Form.Label>
+                                <Form.Control as="textarea" rows={3} placeholder="Write your review here" required />
+                            </Form.Group>
+                            <Form.Group controlId="rating">
+                                <Form.Label>Rating</Form.Label>
+                                <Form.Control type="number" min="1" max="5" placeholder="Enter your rating (1-5)" required />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">Submit Review</Button>
+                        </Form>
+
                     </Card.Body>
                 </Card>
             )
