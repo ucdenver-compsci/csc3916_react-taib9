@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchMovie } from "../actions/movieActions";
+import { fetchMovie, addMovieReview } from "../actions/movieActions";
 import {connect} from 'react-redux';
 import {Card, ListGroup, ListGroupItem, Form, Button } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs'
@@ -12,6 +12,20 @@ class MovieDetail extends Component {
         if (this.props.selectedMovie == null) {
             dispatch(fetchMovie(this.props.movieId));
         }
+    }
+
+    handleReviewSubmit = (e) => {
+        e.preventDefault();
+        const { dispatch, selectedMovie } = this.props;
+        const username = e.target.username.value;
+        const reviewText = e.target.reviewText.value;
+        const rating = parseInt(e.target.rating.value);
+
+        // Dispatch an action to add the review
+        dispatch(addMovieReview(selectedMovie.id, { username, reviewText, rating }));
+
+        // Clear the form fields after submission
+        e.target.reset();
     }
 
     render() {

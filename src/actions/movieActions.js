@@ -70,3 +70,13 @@ export function fetchMovies() {
         }).catch((e) => console.log(e));
     }
 }
+
+export const addMovieReview = (movieId, review) => {
+    return {
+        type: actionTypes.ADD_MOVIE_REVIEW,
+        payload: {
+            movieId,
+            review
+        }
+    };
+};
